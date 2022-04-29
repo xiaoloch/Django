@@ -1,6 +1,6 @@
 from django.urls import path
-from book.views import index
+from book.views import index,GetUrl
 
 urlpatterns = [
-    path('index/',index),
+    path('<para2>/',GetUrl),
 ]

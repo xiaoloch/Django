@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from book.views import register,header
 # from book.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 添加一个路径
     # path('路由','视图函数名')
-    path('',include('book.urls')),
+    path('<para1>/',include('book.urls')),
+    path('register/',register),
+    path('header/',header)
 ]
