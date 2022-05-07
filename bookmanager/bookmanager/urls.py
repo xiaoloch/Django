@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.urls import converters
 from django.urls.converters import register_converter
-from book.views import register,header,json
+from book.views import register,header,json,set_cookie,get_cookie,del_cookie
 # from book.views import index
 
 class Mobile():
@@ -34,6 +34,9 @@ urlpatterns = [
     # path('<int:para1>/',include('book.urls')),
     path('register/',register),
     path('header/',header),
-    path('resp/', json)
+    path('resp/', json),
+    path('set_cookie',set_cookie),
+    path('get_cookie',get_cookie),
+    path('del_cookie',del_cookie)
 ]
 

@@ -48,6 +48,21 @@ def json(request):
     return redirect("http://www.baidu.com")
     # return JsonResponse(response,safe=False)
 
+def set_cookie(request):
+    name = request.GET['username']
+    response = HttpResponse('It is done!')
+    response.set_cookie('name',name,max_age=60*60)
+    response.set_cookie('passwd', "Daliancxl")
+    return response
+
+def get_cookie(request):
+    name = request.COOKIES['name']
+    return HttpResponse(name)
+
+def del_cookie(request):
+    response = HttpResponse('See see if cookie is deleted')
+    response.delete_cookie('name')
+    return response
 
 
 
