@@ -15,13 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from book.views import register,header
+from django.urls import converters
+from django.urls.converters import register_converter
+from book.views import register,header,json
 # from book.views import index
+
+class Mobile():
+    regex = '1[3-9]\d{9}'
+    def to_python(self,value):
+        return int(value)
+
+register_converter(Mobile,'phone')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 添加一个路径
     # path('路由','视图函数名')
-    path('<para1>/',include('book.urls')),
+    # path('<int:para1>/',include('book.urls')),
     path('register/',register),
-    path('header/',header)
+    path('header/',header),
+    path('resp/', json)
 ]
+

@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -36,3 +37,17 @@ def header(request):
     host = request.META['HTTP_HOST']
     print(request.method)
     return HttpResponse("%s %s" %(host,request.method))
+
+def resp(request):
+    response = HttpResponse('itcast python', status=400)
+    response.status_code = 500
+    return response
+
+def json(request):
+    response = [{"name":"xiaolong","age":35},{"name":"shuai","age":35}]
+    return redirect("http://www.baidu.com")
+    # return JsonResponse(response,safe=False)
+
+
+
+
