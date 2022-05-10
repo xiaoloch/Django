@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.deprecation import MiddlewareMixin
+
 
 # Create your views here.
 from django.http import HttpResponse
@@ -89,4 +92,23 @@ class login(View):
         return HttpResponse('get get get')
     def post(self,request):
         return HttpResponse('post post post')
+
+
+class loginview(LoginRequiredMixin,View):
+    def get(self,request):
+        return HttpResponse('get get get')
+    def post(self,request):
+        return HttpResponse('post post post')
+
+class TestMiddleWare(MiddlewareMixin):
+    def process_request(self,request):
+        print('每次请求前，都会被调用执行')
+        username = request.COOKIES.get('name')
+        if username is None:
+            print('没有用户信息')
+        else:
+            print('有用户信息')
+    def process_response(self,request,response):
+        print('每次响应前，都会调用执行')
+        return HttpResponse()
 
