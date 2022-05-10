@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
-
+from django.views import View
 
 # Create your views here.
 from django.http import HttpResponse
@@ -64,5 +64,29 @@ def del_cookie(request):
     response.delete_cookie('name')
     return response
 
+def set_session(request):
+    # 1.模拟获取用户信息
+    username = request.GET.get('username')
 
+    # 2. 设置session信息
+    user_id = 1
+    request.session['user_id'] = user_id
+    request.session['username'] = username
+
+    return HttpResponse("set_session")
+
+def get_session(request):
+    # user_id = request.session['user_id']
+    # username = request.session['username']
+    # content = '{},{}'.format(user_id,username)
+    # request.session.clear()
+    # request.session.flush()
+    request.session.set_expiry(3600)
+    return HttpResponse('flushed')
+
+class login(View):
+    def get(self,request):
+        return HttpResponse('get get get')
+    def post(self,request):
+        return HttpResponse('post post post')
 

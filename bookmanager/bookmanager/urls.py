@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.urls import converters
 from django.urls.converters import register_converter
-from book.views import register,header,json,set_cookie,get_cookie,del_cookie
+from book.views import register,header,json,set_cookie,get_cookie,del_cookie,set_session,get_session,login
 # from book.views import index
 
 class Mobile():
@@ -37,6 +37,9 @@ urlpatterns = [
     path('resp/', json),
     path('set_cookie',set_cookie),
     path('get_cookie',get_cookie),
-    path('del_cookie',del_cookie)
+    path('del_cookie',del_cookie),
+    path('set_session',set_session),
+    path('get_session',get_session),
+    path('163login',login.as_view())
 ]
 
